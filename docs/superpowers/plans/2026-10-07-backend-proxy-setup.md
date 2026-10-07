@@ -26,7 +26,7 @@
 - Consumes: 系统环境变量
 - Produces: Vite 开发服务器 `/api` 代理路由
 
-- [ ] **Step 1: 更新环境变量文件 `.env`**
+- [x] **Step 1: 更新环境变量文件 `.env`**
 
 在 `.env` 中加入代理目标与基础路径：
 ```env
@@ -34,7 +34,7 @@ VITE_API_BASE_URL=/api
 VITE_PROXY_TARGET=https://api.fake-rest.refine.dev
 ```
 
-- [ ] **Step 2: 修改 `vite.config.ts` 配置代理**
+- [x] **Step 2: 修改 `vite.config.ts` 配置代理**
 
 使用 `loadEnv` 读取环境变量，并配置 `server.proxy`：
 ```ts
@@ -61,7 +61,7 @@ export default defineConfig(({ mode }) => {
 });
 ```
 
-- [ ] **Step 3: 验证代理转发**
+- [x] **Step 3: 验证代理转发**
 
 测试通过本地 Vite 服务访问 `/api/blog_posts`：
 ```bash
@@ -69,7 +69,7 @@ powershell -Command "curl.exe -s http://localhost:5173/api/blog_posts | Select-S
 ```
 预期：返回包含文章标题的 JSON 数据（HTTP 200）。
 
-- [ ] **Step 4: 提交 Task 1 代码**
+- [x] **Step 4: 提交 Task 1 代码**
 
 ```bash
 git add .env vite.config.ts
@@ -87,14 +87,14 @@ git commit -m "feat: configure vite dev proxy for /api"
 - Consumes: `import.meta.env.VITE_API_BASE_URL`
 - Produces: `API_URL` 导出常量供 Refine dataProvider 使用
 
-- [ ] **Step 1: 修改 `src/providers/constants.ts`**
+- [x] **Step 1: 修改 `src/providers/constants.ts`**
 
 ```ts
 export const API_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 export const TOKEN_KEY = "refine-auth";
 ```
 
-- [ ] **Step 2: TypeScript 类型与语法检查**
+- [x] **Step 2: TypeScript 类型与语法检查**
 
 运行：
 ```bash
@@ -102,7 +102,7 @@ npx tsc --noEmit
 ```
 预期：无类型或语法错误，退出码为 0。
 
-- [ ] **Step 3: 验证文章和分类数据请求**
+- [x] **Step 3: 验证文章和分类数据请求**
 
 测试通过本地端口获取分类列表：
 ```bash
@@ -110,7 +110,7 @@ powershell -Command "curl.exe -s http://localhost:5173/api/categories | Select-S
 ```
 预期：成功返回分类数据。
 
-- [ ] **Step 4: 提交 Task 2 代码**
+- [x] **Step 4: 提交 Task 2 代码**
 
 ```bash
 git add src/providers/constants.ts
