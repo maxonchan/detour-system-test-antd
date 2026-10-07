@@ -1,4 +1,5 @@
 import {
+  CreateButton,
   DateField,
   DeleteButton,
   EditButton,
@@ -8,10 +9,12 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { type BaseRecord, useMany } from "@refinedev/core";
-import { Space, Table } from "antd";
+import { Space, Switch, Table } from "antd";
 import React from "react";
 
 export const BlogPostList = () => {
+  const [showActions, setShowActions] = React.useState(true);
+
   const { result, tableProps } = useTable({
     syncWithLocation: true,
   });
@@ -28,7 +31,26 @@ export const BlogPostList = () => {
   });
 
   return (
-    <List>
+    <List
+      headerProps={{
+        className: "blog-posts-header",
+      }}
+      headerButtons={({ defaultButtons }) => (
+        <>
+          <style>{`
+            .blog-posts-header .ant-page-header-heading {
+              align-items: flex-start;
+            }
+          `}</style>
+          <Space direction="vertical" align="end" size={12}>
+            <div style={{ display: "flex", alignItems: "center", minHeight: 32 }}>
+              <Switch checked={showActions} onChange={setShowActions} />
+            </div>
+            {showActions && (defaultButtons ?? <CreateButton />)}
+          </Space>
+        </>
+      )}
+    >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
         <Table.Column dataIndex="title" title={"Title"} />
@@ -57,17 +79,19 @@ export const BlogPostList = () => {
           title={"Created at"}
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column
-          title={"Actions"}
-          dataIndex="actions"
-          render={(_, record: BaseRecord) => (
-            <Space>
-              <EditButton hideText size="small" recordItemId={record.id} />
-              <ShowButton hideText size="small" recordItemId={record.id} />
-              <DeleteButton hideText size="small" recordItemId={record.id} />
-            </Space>
-          )}
-        />
+        {showActions && (
+          <Table.Column
+            title={"Actions"}
+            dataIndex="actions"
+            render={(_, record: BaseRecord) => (
+              <Space>
+                <EditButton hideText size="small" recordItemId={record.id} />
+                <ShowButton hideText size="small" recordItemId={record.id} />
+                <DeleteButton hideText size="small" recordItemId={record.id} />
+              </Space>
+            )}
+          />
+        )}
       </Table>
     </List>
   );
