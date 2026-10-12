@@ -3,12 +3,14 @@ import { useGetIdentity } from "@refinedev/core";
 import {
   Avatar,
   Layout as AntdLayout,
+  Select,
   Space,
   Switch,
   theme,
   Typography,
 } from "antd";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { ColorModeContext } from "../../contexts/color-mode";
 
 const { Text } = Typography;
@@ -26,6 +28,7 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
   const { token } = useToken();
   const { data: user } = useGetIdentity<IUser>();
   const { mode, setMode } = useContext(ColorModeContext);
+  const { i18n } = useTranslation();
 
   const headerStyles: React.CSSProperties = {
     backgroundColor: token.colorBgElevated,
@@ -42,9 +45,23 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
     headerStyles.zIndex = 1;
   }
 
+  const currentLang = i18n.language?.startsWith("en") ? "en" : "ja";
+
   return (
     <AntdLayout.Header style={headerStyles}>
-      <Space>
+      <Space size="middle">
+        <Select
+          value={currentLang}
+          onChange={(lang) => {
+            localStorage.setItem("i18nextLng", lang);
+            i18n.changeLanguage(lang);
+          }}
+          options={[
+            { value: "ja", label: "🇯🇵 日本語" },
+            { value: "en", label: "🇬🇧 English" },
+          ]}
+          style={{ width: 110 }}
+        />
         <Switch
           checkedChildren="🌛"
           unCheckedChildren="🔆"

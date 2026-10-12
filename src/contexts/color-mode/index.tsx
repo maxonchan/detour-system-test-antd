@@ -6,6 +6,11 @@ import {
 } from "react";
 import { ConfigProvider, theme } from "antd";
 import { RefineThemes } from "@refinedev/antd";
+import jaJP from "antd/locale/ja_JP";
+import enUS from "antd/locale/en_US";
+import "dayjs/locale/ja";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 type ColorModeContextType = {
   mode: string;
@@ -42,6 +47,13 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
   };
 
   const { darkAlgorithm, defaultAlgorithm } = theme;
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language || "ja";
+  const antdLocale = currentLang.startsWith("en") ? enUS : jaJP;
+
+  useEffect(() => {
+    dayjs.locale(currentLang.startsWith("en") ? "en" : "ja");
+  }, [currentLang]);
 
   return (
     <ColorModeContext.Provider
@@ -51,6 +63,7 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
       }}
     >
       <ConfigProvider
+        locale={antdLocale}
         // you can change the theme colors here. example: ...RefineThemes.Magenta,
         theme={{
           ...RefineThemes.Blue,

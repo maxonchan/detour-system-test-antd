@@ -1,9 +1,11 @@
 import { Edit, useForm, useSelect } from "@refinedev/antd";
+import { useTranslate } from "@refinedev/core";
 import MDEditor from "@uiw/react-md-editor";
 import { Form, Input, Select } from "antd";
 import React from "react";
 
 export const BlogPostEdit = () => {
+  const translate = useTranslate();
   const { formProps, saveButtonProps, query, formLoading } = useForm({});
 
   const blogPostsData = query?.data?.data;
@@ -20,7 +22,7 @@ export const BlogPostEdit = () => {
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={"Title"}
+          label={translate("blog_posts.fields.title", "タイトル")}
           name={["title"]}
           rules={[
             {
@@ -31,7 +33,7 @@ export const BlogPostEdit = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Content"}
+          label={translate("blog_posts.fields.content", "内容")}
           name="content"
           rules={[
             {
@@ -42,7 +44,7 @@ export const BlogPostEdit = () => {
           <MDEditor data-color-mode="light" />
         </Form.Item>
         <Form.Item
-          label={"Category"}
+          label={translate("blog_posts.fields.category", "カテゴリー")}
           name={["category", "id"]}
           initialValue={formProps?.initialValues?.category?.id}
           rules={[
@@ -54,7 +56,7 @@ export const BlogPostEdit = () => {
           <Select {...categorySelectProps} />
         </Form.Item>
         <Form.Item
-          label={"Status"}
+          label={translate("blog_posts.fields.status", "ステータス")}
           name={["status"]}
           initialValue={"draft"}
           rules={[
@@ -66,9 +68,9 @@ export const BlogPostEdit = () => {
           <Select
             defaultValue={"draft"}
             options={[
-              { value: "draft", label: "Draft" },
-              { value: "published", label: "Published" },
-              { value: "rejected", label: "Rejected" },
+              { value: "draft", label: translate("blog_posts.status.draft", "下書き") },
+              { value: "published", label: translate("blog_posts.status.published", "公開済み") },
+              { value: "rejected", label: translate("blog_posts.status.rejected", "却下") },
             ]}
             style={{ width: 120 }}
           />

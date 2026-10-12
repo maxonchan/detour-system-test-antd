@@ -1,0 +1,136 @@
+{
+  "buttons": {
+    "create": "新規作成",
+    "edit": "編集",
+    "delete": "削除",
+    "show": "詳細",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "refresh": "更新",
+    "clear": "クリア",
+    "filter": "フィルター",
+    "confirm": "本当によろしいですか？",
+    "logout": "ログアウト",
+    "notAccessTitle": "アクセス権限がありません"
+  },
+  "notifications": {
+    "success": "成功",
+    "error": "エラー",
+    "createSuccess": "正常に作成されました",
+    "createError": "作成中にエラーが発生しました",
+    "editSuccess": "正常に更新されました",
+    "editError": "更新中にエラーが発生しました",
+    "deleteSuccess": "正常に削除されました",
+    "deleteError": "削除中にエラーが発生しました",
+    "undoable": "元に戻す"
+  },
+  "blog_posts": {
+    "blog_posts": "ブログ記事",
+    "titles": {
+      "list": "ブログ記事一覧",
+      "create": "ブログ記事の作成",
+      "edit": "ブログ記事の編集",
+      "show": "ブログ記事の詳細"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "タイトル",
+      "content": "内容",
+      "category": "カテゴリー",
+      "status": "ステータス",
+      "createdAt": "作成日時",
+      "actions": "操作"
+    },
+    "status": {
+      "draft": "下書き",
+      "published": "公開済み",
+      "rejected": "却下"
+    },
+    "modal": {
+      "open": "モーダルを開く",
+      "title": "フォームモーダル",
+      "submitSuccess": "送信に成功しました",
+      "inputTitle": "タイトルを入力してください",
+      "inputContent": "内容を入力してください"
+    }
+  },
+  "categories": {
+    "categories": "カテゴリー",
+    "titles": {
+      "list": "カテゴリー一覧",
+      "create": "カテゴリーの作成",
+      "edit": "カテゴリーの編集",
+      "show": "カテゴリーの詳細"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "タイトル",
+      "actions": "操作"
+    }
+  },
+  "pages": {
+    "login": {
+      "title": "アカウントにサインイン",
+      "signin": "サインイン",
+      "signup": "新規登録",
+      "divider": "または",
+      "fields": {
+        "email": "メールアドレス",
+        "password": "パスワード"
+      },
+      "errors": {
+        "validEmail": "有効なメールアドレスを入力してください",
+        "requiredEmail": "メールアドレスを入力してください",
+        "requiredPassword": "パスワードを入力してください"
+      },
+      "buttons": {
+        "submit": "ログイン",
+        "forgotPassword": "パスワードをお忘れですか？",
+        "noAccount": "アカウントをお持ちでないですか？",
+        "rememberMe": "ログイン状態を保持する"
+      }
+    },
+    "register": {
+      "title": "アカウント登録",
+      "signin": "サインイン",
+      "divider": "または",
+      "fields": {
+        "email": "メールアドレス",
+        "password": "パスワード"
+      },
+      "errors": {
+        "validEmail": "有効なメールアドレスを入力してください",
+        "requiredEmail": "メールアドレスを入力してください",
+        "requiredPassword": "パスワードを入力してください"
+      },
+      "buttons": {
+        "submit": "登録",
+        "haveAccount": "すでにアカウントをお持ちですか？"
+      }
+    },
+    "forgotPassword": {
+      "title": "パスワードの再設定",
+      "signin": "サインイン",
+      "fields": {
+        "email": "メールアドレス"
+      },
+      "errors": {
+        "validEmail": "有効なメールアドレスを入力してください",
+        "requiredEmail": "メールアドレスを入力してください"
+      },
+      "buttons": {
+        "submit": "再設定メールを送信",
+        "haveAccount": "パスワードを思い出しましたか？"
+      }
+    },
+    "error": {
+      "404": "申し訳ありません。お探しのページは見つかりませんでした。",
+      "info": "エラーが発生しました",
+      "backHome": "ホームに戻る"
+    }
+  },
+  "warnWhenUnsavedChanges": "保存されていない変更があります。ページを離れてもよろしいですか？",
+  "common": {
+    "loading": "読み込み中..."
+  }
+}

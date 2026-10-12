@@ -1,0 +1,136 @@
+{
+  "buttons": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "show": "Show",
+    "save": "Save",
+    "cancel": "Cancel",
+    "refresh": "Refresh",
+    "clear": "Clear",
+    "filter": "Filter",
+    "confirm": "Are you sure?",
+    "logout": "Logout",
+    "notAccessTitle": "You don't have access"
+  },
+  "notifications": {
+    "success": "Successful",
+    "error": "Error",
+    "createSuccess": "Successfully created",
+    "createError": "Error when creating",
+    "editSuccess": "Successfully updated",
+    "editError": "Error when updating",
+    "deleteSuccess": "Successfully deleted",
+    "deleteError": "Error when deleting",
+    "undoable": "Undo"
+  },
+  "blog_posts": {
+    "blog_posts": "Blog Posts",
+    "titles": {
+      "list": "Blog Posts",
+      "create": "Create Blog Post",
+      "edit": "Edit Blog Post",
+      "show": "Show Blog Post"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "content": "Content",
+      "category": "Category",
+      "status": "Status",
+      "createdAt": "Created at",
+      "actions": "Actions"
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "rejected": "Rejected"
+    },
+    "modal": {
+      "open": "Open Modal",
+      "title": "Form Modal",
+      "submitSuccess": "Submission Successful",
+      "inputTitle": "Please enter title",
+      "inputContent": "Please enter content"
+    }
+  },
+  "categories": {
+    "categories": "Categories",
+    "titles": {
+      "list": "Categories",
+      "create": "Create Category",
+      "edit": "Edit Category",
+      "show": "Show Category"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "actions": "Actions"
+    }
+  },
+  "pages": {
+    "login": {
+      "title": "Sign in to your account",
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "divider": "or",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address",
+        "requiredEmail": "Email is required",
+        "requiredPassword": "Password is required"
+      },
+      "buttons": {
+        "submit": "Sign in",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don't have an account?",
+        "rememberMe": "Remember me"
+      }
+    },
+    "register": {
+      "title": "Sign up for your account",
+      "signin": "Sign in",
+      "divider": "or",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address",
+        "requiredEmail": "Email is required",
+        "requiredPassword": "Password is required"
+      },
+      "buttons": {
+        "submit": "Register",
+        "haveAccount": "Have an account?"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "signin": "Sign in",
+      "fields": {
+        "email": "Email"
+      },
+      "errors": {
+        "validEmail": "Invalid email address",
+        "requiredEmail": "Email is required"
+      },
+      "buttons": {
+        "submit": "Send reset instructions",
+        "haveAccount": "Remember your password?"
+      }
+    },
+    "error": {
+      "404": "Sorry, the page you visited does not exist.",
+      "info": "An error occurred",
+      "backHome": "Back Home"
+    }
+  },
+  "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
+  "common": {
+    "loading": "Loading..."
+  }
+}

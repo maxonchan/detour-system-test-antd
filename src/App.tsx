@@ -1,14 +1,8 @@
-import {
-  Refine,
-  GitHubBanner,
-  WelcomePage,
-  Authenticated,
-} from "@refinedev/core";
+import { Refine, GitHubBanner, Authenticated } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
-  AuthPage,
   ErrorComponent,
   useNotificationProvider,
   ThemedLayout,
@@ -17,7 +11,7 @@ import {
 import "@refinedev/antd/dist/reset.css";
 
 import { App as AntdApp } from "antd";
-import { BrowserRouter, Route, Routes, Outlet } from "react-router";
+import { BrowserRouter, Route, Routes, Outlet, Navigate } from "react-router";
 import routerProvider, {
   NavigateToResource,
   CatchAllNavigate,
@@ -29,20 +23,20 @@ import {
   BlogPostCreate,
   BlogPostEdit,
   BlogPostShow,
-} from "./pages/blog-posts";
+} from "./pages/admin/blog-posts";
 import {
   CategoryList,
   CategoryCreate,
   CategoryEdit,
   CategoryShow,
-} from "./pages/categories";
+} from "./pages/admin/categories";
 import { dataProvider } from "./providers/data";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { Header } from "./components/header";
-import { Login } from "./pages/login";
-import { Register } from "./pages/register";
-import { ForgotPassword } from "./pages/forgotPassword";
+import { Login, Register, ForgotPassword } from "./pages/auth";
 import { authProvider } from "./providers/auth";
+import "./i18n";
+import { i18nProvider } from "./i18n";
 
 function App() {
   return (
@@ -53,6 +47,7 @@ function App() {
           <AntdApp>
             <DevtoolsProvider>
               <Refine
+                i18nProvider={i18nProvider}
                 dataProvider={dataProvider}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
@@ -60,20 +55,20 @@ function App() {
                 resources={[
                   {
                     name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
+                    list: "/admin/blog-posts",
+                    create: "/admin/blog-posts/create",
+                    edit: "/admin/blog-posts/edit/:id",
+                    show: "/admin/blog-posts/show/:id",
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
                     name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
+                    list: "/admin/categories",
+                    create: "/admin/categories/create",
+                    edit: "/admin/categories/edit/:id",
+                    show: "/admin/categories/show/:id",
                     meta: {
                       canDelete: true,
                     },
@@ -86,43 +81,14 @@ function App() {
                 }}
               >
                 <Routes>
+                  {/* Root redirect to /admin */}
+                  <Route path="/" element={<Navigate to="/admin" replace />} />
+
+                  {/* Shared Auth routes for admin and client applications */}
                   <Route
                     element={
                       <Authenticated
-                        key="authenticated-inner"
-                        fallback={<CatchAllNavigate to="/login" />}
-                      >
-                        <ThemedLayout
-                          Header={Header}
-                          Sider={(props) => <ThemedSider {...props} fixed />}
-                        >
-                          <Outlet />
-                        </ThemedLayout>
-                      </Authenticated>
-                    }
-                  >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
-                    </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
-                    </Route>
-                    <Route path="*" element={<ErrorComponent />} />
-                  </Route>
-                  <Route
-                    element={
-                      <Authenticated
-                        key="authenticated-outer"
+                        key="authenticated-auth"
                         fallback={<Outlet />}
                       >
                         <NavigateToResource />
@@ -136,6 +102,46 @@ function App() {
                       element={<ForgotPassword />}
                     />
                   </Route>
+
+                  {/* Admin application routes */}
+                  <Route path="/admin">
+                    <Route
+                      element={
+                        <Authenticated
+                          key="authenticated-admin"
+                          fallback={<CatchAllNavigate to="/login" />}
+                        >
+                          <ThemedLayout
+                            Header={Header}
+                            Sider={(props) => <ThemedSider {...props} fixed />}
+                          >
+                            <Outlet />
+                          </ThemedLayout>
+                        </Authenticated>
+                      }
+                    >
+                      <Route
+                        index
+                        element={<NavigateToResource resource="blog_posts" />}
+                      />
+                      <Route path="blog-posts">
+                        <Route index element={<BlogPostList />} />
+                        <Route path="create" element={<BlogPostCreate />} />
+                        <Route path="edit/:id" element={<BlogPostEdit />} />
+                        <Route path="show/:id" element={<BlogPostShow />} />
+                      </Route>
+                      <Route path="categories">
+                        <Route index element={<CategoryList />} />
+                        <Route path="create" element={<CategoryCreate />} />
+                        <Route path="edit/:id" element={<CategoryEdit />} />
+                        <Route path="show/:id" element={<CategoryShow />} />
+                      </Route>
+                    </Route>
+                    <Route path="*" element={<ErrorComponent />} />
+                  </Route>
+
+                  {/* Top-level 404 handler */}
+                  <Route path="*" element={<ErrorComponent />} />
                 </Routes>
 
                 <RefineKbar />
