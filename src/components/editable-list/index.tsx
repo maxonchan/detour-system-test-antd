@@ -7,11 +7,18 @@ import { useMemo, useState } from "react";
 interface EditableListProps {
   columns: TableProps<BaseRecord>["columns"];
   dataSource?: BaseRecord[];
+  onCreate?: () => void;
+  children?: React.ReactNode;
 }
 
-export const EditableList = ({ columns, dataSource }: EditableListProps) => {
+export const EditableList = ({
+  columns,
+  dataSource,
+  onCreate,
+  children,
+}: EditableListProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const { tableProps, searchFormProps } = useTable({
+  const { tableProps } = useTable({
     syncWithLocation: true,
   });
 
@@ -41,7 +48,17 @@ export const EditableList = ({ columns, dataSource }: EditableListProps) => {
                 <Switch checked={isEditMode} onChange={setIsEditMode} />
               </div>
             </Space>
-            {isEditMode && (defaultButtons ?? <CreateButton />)}
+            {isEditMode &&
+              (onCreate ? (
+                <CreateButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onCreate();
+                  }}
+                />
+              ) : (
+                defaultButtons ?? <CreateButton />
+              ))}
           </Space>
         </>
       )}
@@ -51,6 +68,7 @@ export const EditableList = ({ columns, dataSource }: EditableListProps) => {
         dataSource={dataSource ? dataSource : tableProps.dataSource}
         columns={columnsList}
       />
+      {children}
     </List>
   );
 };
