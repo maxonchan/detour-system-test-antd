@@ -6,20 +6,19 @@ import { useMemo, useState } from "react";
 
 interface EditableListProps {
   columns: TableProps<BaseRecord>["columns"];
+  dataSource?: BaseRecord[];
 }
 
-export const EditableList = ({ columns }: EditableListProps) => {
+export const EditableList = ({ columns, dataSource }: EditableListProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const { tableProps, searchFormProps } = useTable({
     syncWithLocation: true,
   });
 
-  const removeActionColumn = useMemo(() => {
-    return columns?.filter((column) => column.key !== "actions");
-  }, [columns]);
-
   const columnsList = useMemo(() => {
-    return isEditMode ? columns : removeActionColumn;
+    return isEditMode
+      ? columns
+      : columns?.filter((column) => column.key !== "actions");
   }, [columns, isEditMode]);
 
   return (
@@ -47,7 +46,11 @@ export const EditableList = ({ columns }: EditableListProps) => {
         </>
       )}
     >
-      <Table {...tableProps} columns={columnsList} />
+      <Table
+        {...tableProps}
+        dataSource={dataSource ? dataSource : tableProps.dataSource}
+        columns={columnsList}
+      />
     </List>
   );
 };
