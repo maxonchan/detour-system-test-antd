@@ -71,14 +71,17 @@
   "pages": {
     "login": {
       "title": "Sign in to your account",
+      "subtitle": "Please enter your username and password",
       "signin": "Sign in",
       "signup": "Sign up",
       "divider": "or",
       "fields": {
+        "username": "Username",
         "email": "Email",
         "password": "Password"
       },
       "errors": {
+        "requiredUsername": "Username is required",
         "validEmail": "Invalid email address",
         "requiredEmail": "Email is required",
         "requiredPassword": "Password is required"

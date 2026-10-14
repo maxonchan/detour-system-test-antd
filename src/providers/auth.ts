@@ -3,8 +3,9 @@ import { TOKEN_KEY } from "./constants";
 
 export const authProvider: AuthProvider = {
   login: async ({ username, email, password }) => {
-    if ((username || email) && password) {
-      localStorage.setItem(TOKEN_KEY, username);
+    const userIdentifier = username || email;
+    if (userIdentifier && password) {
+      localStorage.setItem(TOKEN_KEY, userIdentifier);
       return {
         success: true,
         redirectTo: "/",
@@ -45,7 +46,7 @@ export const authProvider: AuthProvider = {
     if (token) {
       return {
         id: 1,
-        name: "John Doe",
+        name: token || "Admin",
         avatar: "https://i.pravatar.cc/300",
       };
     }

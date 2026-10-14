@@ -71,14 +71,17 @@
   "pages": {
     "login": {
       "title": "アカウントにサインイン",
+      "subtitle": "ユーザー名とパスワードを入力してください",
       "signin": "サインイン",
       "signup": "新規登録",
       "divider": "または",
       "fields": {
+        "username": "ユーザー名",
         "email": "メールアドレス",
         "password": "パスワード"
       },
       "errors": {
+        "requiredUsername": "ユーザー名を入力してください",
         "validEmail": "有効なメールアドレスを入力してください",
         "requiredEmail": "メールアドレスを入力してください",
         "requiredPassword": "パスワードを入力してください"
